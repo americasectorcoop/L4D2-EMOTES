@@ -84,7 +84,7 @@ public void OnPluginStart()
   g_cvFlagDancesMenu = AutoExecConfig_CreateConVar("sm_dances_admin_flag_menu", "a", "admin flag for dances (empty for all players)");
   g_cvHideWeapons = AutoExecConfig_CreateConVar("sm_emotes_hide_weapons", "1", "Hide weapons when dancing", _, true, 0.0, true, 1.0);
   g_cvHidePlayers = AutoExecConfig_CreateConVar("sm_emotes_hide_enemies", "0", "Hide enemy players when dancing", _, true, 0.0, true, 1.0);
-  g_cvTeleportBack = AutoExecConfig_CreateConVar("sm_emotes_teleportonend", "0", "Teleport back to the exact position when he started to dance. (Some maps need this for teleport triggers)", _, true, 0.0, true, 1.0);
+  g_cvTeleportBack = AutoExecConfig_CreateConVar("sm_emotes_teleportonend", "1", "Teleport back to the exact position when he started to dance. (Some maps need this for teleport triggers)", _, true, 0.0, true, 1.0);
   
   AutoExecConfig_ExecuteFile();
   
@@ -106,10 +106,11 @@ public void OnPluginStart()
 
 public void OnPluginEnd()
 {
-  for (int i = 1; i <= MaxClients; i++)
-            if (IsValidClient(i) && g_bClientDancing[i]) {
-        StopEmote(i);
-      }
+  for (int i = 1; i <= MaxClients; i++) {
+    if (IsValidClient(i) && g_bClientDancing[i]) {
+      StopEmote(i);
+    }
+  }
 }
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
@@ -134,8 +135,8 @@ public void OnMapStart()
   // add the sound file routes here
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/ninja_dance_01.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/dance_soldier_03.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Hip_Hop_Good_Vibes_Mix_01_Loop.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_zippy_A.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/hip_hop_good_vibes_mix_01_loop.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_zippy_a.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_electroshuffle_music.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_aerobics_01.mp3"); 
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_music_emotes_bendy.mp3");
@@ -146,47 +147,47 @@ public void OnMapStart()
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_cry.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_music_boneless.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emotes_music_shoot_v7.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Athena_Emotes_Music_SwipeIt.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emotes_music_swipeit.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_disco.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_worm_music.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_music_emotes_takethel.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_breakdance_music.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Dance_Pump.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_dance_pump.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_ridethepony_music_01.mp3"); 
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_facepalm_foley_01.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Athena_Emotes_OnTheHook_02.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emotes_onthehook_02.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_floss_music.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_FlippnSexy.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_flippnsexy.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_fresh_music.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_groove_jam_a.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/br_emote_shred_guitar_mix_03_loop.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_HeelClick.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_heelclick.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/s5_hiphop_breakin_132bmp_loop.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Hotstuff.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_hotstuff.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_hula_01.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_infinidab.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_Intensity.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_intensity.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_irish_jig_foley_music_loop.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Athena_Music_Emotes_KoreanEagle.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_music_emotes_koreaneagle.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_kpop_01.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_laugh_01.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_LivingLarge_A.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Luchador.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Hillbilly_Shuffle.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_samba_new_B.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_livinglarge_a.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_luchador.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_hillbilly_shuffle.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_samba_new_b.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_makeitrain_music.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Athena_Emote_PopLock.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_PopRock_01.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_poplock.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_poprock_01.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_robot_music.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_salute_foley_01.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Snap1.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_snap1.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_stagebow.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Dino_Complete.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_dino_complete.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emote_founders_music.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emotes_music_twist.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Warehouse.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Wiggle_Music_Loop.mp3");
-  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/Emote_Yeet.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_warehouse.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/wiggle_music_loop.mp3");
+  AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/emote_yeet.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/youre_awesome_emote_music.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/athena_emotes_lankylegs_loop_02.mp3");
   AddFileToDownloadsTable("sound/godspeed/fortnite_emotes/eastern_bloc_musc_setup_d.mp3");
@@ -202,8 +203,8 @@ public void OnMapStart()
   // add wav files with */
   PrecacheSound("godspeed/fortnite_emotes/ninja_dance_01.mp3");
   PrecacheSound("godspeed/fortnite_emotes/dance_soldier_03.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Hip_Hop_Good_Vibes_Mix_01_Loop.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/emote_zippy_A.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/hip_hop_good_vibes_mix_01_loop.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_zippy_a.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_electroshuffle_music.mp3");
   PrecacheSound("godspeed/fortnite_emotes/emote_aerobics_01.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_music_emotes_bendy.mp3");
@@ -215,47 +216,47 @@ public void OnMapStart()
   PrecacheSound("godspeed/fortnite_emotes/emote_cry.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_music_boneless.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emotes_music_shoot_v7.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Athena_Emotes_Music_SwipeIt.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/athena_emotes_music_swipeit.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_disco.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_worm_music.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_music_emotes_takethel.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_breakdance_music.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Dance_Pump.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_dance_pump.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_ridethepony_music_01.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_facepalm_foley_01.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Athena_Emotes_OnTheHook_02.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/athena_emotes_onthehook_02.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_floss_music.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_FlippnSexy.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_flippnsexy.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_fresh_music.mp3");
   PrecacheSound("godspeed/fortnite_emotes/emote_groove_jam_a.mp3");
   PrecacheSound("godspeed/fortnite_emotes/br_emote_shred_guitar_mix_03_loop.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_HeelClick.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_heelclick.mp3");
   PrecacheSound("godspeed/fortnite_emotes/s5_hiphop_breakin_132bmp_loop.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Hotstuff.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_hotstuff.mp3");
   PrecacheSound("godspeed/fortnite_emotes/emote_hula_01.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_infinidab.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/emote_Intensity.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_intensity.mp3");
   PrecacheSound("godspeed/fortnite_emotes/emote_irish_jig_foley_music_loop.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Athena_Music_Emotes_KoreanEagle.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/athena_music_emotes_koreaneagle.mp3");
   PrecacheSound("godspeed/fortnite_emotes/emote_kpop_01.mp3");
   PrecacheSound("godspeed/fortnite_emotes/emote_laugh_01.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/emote_LivingLarge_A.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Luchador.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Hillbilly_Shuffle.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/emote_samba_new_B.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_livinglarge_a.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_luchador.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_hillbilly_shuffle.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_samba_new_b.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_makeitrain_music.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Athena_Emote_PopLock.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_PopRock_01.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/athena_emote_poplock.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_poprock_01.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_robot_music.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_salute_foley_01.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Snap1.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_snap1.mp3");
   PrecacheSound("godspeed/fortnite_emotes/emote_stagebow.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Dino_Complete.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_dino_complete.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emote_founders_music.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emotes_music_twist.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Warehouse.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Wiggle_Music_Loop.mp3");
-  PrecacheSound("godspeed/fortnite_emotes/Emote_Yeet.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_warehouse.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/wiggle_music_loop.mp3");
+  PrecacheSound("godspeed/fortnite_emotes/emote_yeet.mp3");
   PrecacheSound("godspeed/fortnite_emotes/youre_awesome_emote_music.mp3");
   PrecacheSound("godspeed/fortnite_emotes/athena_emotes_lankylegs_loop_02.mp3");
   PrecacheSound("godspeed/fortnite_emotes/eastern_bloc_musc_setup_d.mp3");
@@ -310,14 +311,14 @@ void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast)
 void Event_PlayerHurt(Event event, const char[] name, bool dontBroadcast) 
 {
   int attacker = GetClientOfUserId(event.GetInt("attacker"));
-
-  char sAttacker[16];
-  GetEntityClassname(attacker, sAttacker, sizeof(sAttacker));
-  if (StrEqual(sAttacker, "worldspawn"))//If player was killed by bomb
-  {
-    int client = GetClientOfUserId(event.GetInt("userid"));
+  int client = GetClientOfUserId(event.GetInt("userid"));
+  if(GetPlayerTeam(attacker) != GetPlayerTeam(client)) {
     StopEmote(client);
   }
+}
+
+int GetPlayerTeam(int player) {
+  return IsValidClient(player) ? GetClientTeam(player) : 0;
 }
 
 void Event_Start(Event event, const char[] name, bool dontBroadcast)
@@ -368,7 +369,7 @@ Action CreateEmote(int client, const char[] anim1, const char[] anim2, const cha
     }
   }
   
-  if (!IsPlayerAlive(client))
+  if (!IsPlayerAlive(client) || bIsPlayerIncapped(client))
   {
     CReplyToCommand(client, "%t", "MUST_BE_ALIVE");
     return Plugin_Handled;
@@ -1628,9 +1629,19 @@ bool CheckAdminFlags(int client, int iFlag)
 int GetEmotePeople()
 {
   int count;
-  for(int i = 1; i <= MaxClients; i++)
-    if (IsClientInGame(i) && g_bClientDancing[i])
+  for(int i = 1; i <= MaxClients; i++) {
+    if (IsClientInGame(i) && g_bClientDancing[i]) {
       count++;
-      
+    }
+  }
   return count;
+}
+
+/**
+* Metodo para verificar si el jugador esta vivo
+* @param int client
+* @return bool
+*/
+stock bool bIsPlayerIncapped(int client) {
+  return view_as<bool>(GetEntProp(client, Prop_Send, "m_isIncapacitated", 1));
 }
